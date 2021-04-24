@@ -1,0 +1,12 @@
+{
+    "id": "{E0E24345-453D-18C3-7C9F-5EAEB875E546}",
+    "name": "NMEA GPS",
+    "author": "Michael Maroszek",
+    "url": "https://www.symcon.de",
+    "compatibility": {
+        "version": "5.5"
+    },
+    "version": "1.0",
+    "build": 0,
+    "date": 0
+}

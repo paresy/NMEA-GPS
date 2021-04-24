@@ -1,0 +1,16 @@
+{
+    "id": "{EE5EE8A4-D991-0CBE-B5C6-7152239055A7}",
+    "name": "NMEA GPS",
+    "type": 3,
+    "vendor": "",
+    "aliases": [],
+    "parentRequirements": [
+        "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}"
+    ],
+    "childRequirements": [],
+    "implemented": [
+        "{018EF6B5-AB94-40C6-AA53-46943E824ACF}"
+    ],
+    "prefix": "GPS",
+    "url": "https://www.symcon.de"
+}
