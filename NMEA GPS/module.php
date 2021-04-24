@@ -20,6 +20,12 @@ class NMEAGPS extends IPSModule
             IPS_SetVariableProfileDigits("GPS.Position", 4);
         }
 
+        if(!IPS_VariableProfileExists("GPS.Altitude")) {
+            IPS_CreateVariableProfile("GPS.Altitude", VARIABLETYPE_FLOAT);
+            IPS_SetVariableProfileText("GPS.Altitude", "", " m");
+            IPS_SetVariableProfileDigits("GPS.Altitude", 1);
+        }
+
         if(!IPS_VariableProfileExists("GPS.Quality")) {
             IPS_CreateVariableProfile("GPS.Quality", VARIABLETYPE_INTEGER);
             IPS_SetVariableProfileValues("GPS.Quality", 0, 8, 0);
@@ -37,9 +43,10 @@ class NMEAGPS extends IPSModule
         $this->RegisterVariableInteger("DateTime", "DateTime", "~UnixTimestamp", 0);
         $this->RegisterVariableFloat("Latitude", "Latitude", "GPS.Position", 1);
         $this->RegisterVariableFloat("Longitude", "Longitude", "GPS.Position", 2);
-        $this->RegisterVariableFloat("Speed", "Speed", "~WindSpeed.kmh", 3);
-        $this->RegisterVariableInteger("NumberOfSatellites", "Number of Satellites", "", 4);
-        $this->RegisterVariableInteger("GPSQuality", "GPS Quality", "GPS.Quality", 5);
+        $this->RegisterVariableFloat("Altitude", "Altitude", "GPS.Altitude", 3);
+        $this->RegisterVariableFloat("Speed", "Speed", "~WindSpeed.kmh", 4);
+        $this->RegisterVariableInteger("NumberOfSatellites", "Number of Satellites", "", 5);
+        $this->RegisterVariableInteger("GPSQuality", "GPS Quality", "GPS.Quality", 6);
     }
 
     public function Destroy()
@@ -101,6 +108,7 @@ class NMEAGPS extends IPSModule
                     $this->SetValue("DateTime", $frame->getUtcTime()->getTimestamp());
                     $this->SetValue("Latitude", $this->GPSToDecimal($frame->getLatitude(), $frame->getLatitudeDirection()));
                     $this->SetValue("Longitude", $this->GPSToDecimal($frame->getLongitude(), $frame->getLongitudeDirection()));
+                    $this->SetValue("Altitude", $frame->getAltitude());
                     $this->SetValue("NumberOfSatellites", $frame->getNbSatellites());
                     $this->SetValue("GPSQuality", $frame->getGpsQuality());
                     break;
