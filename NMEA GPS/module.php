@@ -54,6 +54,33 @@ class NMEAGPS extends IPSModule
         parent::ApplyChanges();
     }
 
+    private function GPSToDecimal($dms, $direction)
+    {
+        $split = explode(".", $dms);
+        switch(strlen($split[0])) {
+            case 4: // Latitude
+                $d = substr($dms, 0, 2);
+                $m = substr($dms, 2, 2);
+                $s = "0." . $split[1];
+                break;
+            case 5: // Longitude
+                $d = substr($dms, 0, 3);
+                $m = substr($dms, 3, 2);
+                $s = "0." . $split[1];
+                break;
+            default:
+                throw new Exception("Invalid DMS format!");
+        }
+
+        $dec = $d + ($m/60) + (($s*60)/3600);
+
+        if (in_array($direction, ["S", "W"])) {
+            $dec = -1 * $dec;
+        }
+
+        return $dec;
+    }
+
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
@@ -63,21 +90,19 @@ class NMEAGPS extends IPSModule
         $parser = new BultonFr\NMEA\Parser;
 
         foreach ($lines as $line) {
+            if(!$line) {
+                continue;
+            }
+
             $this->SendDebug('GPS', $line, 0 /* Text */);
             $frame = $parser->readLine($line);
             switch($frame->getFrameType()) {
                 case "GGA":
-                     $this->SetValue("DateTime", $frame->getUtcTime()->getTimestamp());
-                     $this->SetValue("Latitude", \BultonFr\NMEA\Utils\Coordinates::convertGPSDataToDec(
-                        $frame->getLatitude(),
-                        false
-                    ));
-                    $this->SetValue("Longitude", \BultonFr\NMEA\Utils\Coordinates::convertGPSDataToDec(
-                        $frame->getLongitude(),
-                        true
-                    ));
-                    $this->SetValue("NumberOfSatellites", $frame->getGpsQuality());
-                    $this->SetValue("GPSQuality", $frame->getNbSatellites());
+                    $this->SetValue("DateTime", $frame->getUtcTime()->getTimestamp());
+                    $this->SetValue("Latitude", $this->GPSToDecimal($frame->getLatitude(), $frame->getLatitudeDirection()));
+                    $this->SetValue("Longitude", $this->GPSToDecimal($frame->getLongitude(), $frame->getLongitudeDirection()));
+                    $this->SetValue("NumberOfSatellites", $frame->getNbSatellites());
+                    $this->SetValue("GPSQuality", $frame->getGpsQuality());
                     break;
                 case "VTG":
                     $this->SetValue("Speed", $frame->getSpeedKmH());
