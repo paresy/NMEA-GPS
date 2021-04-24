@@ -88,6 +88,12 @@ class NMEAGPS extends IPSModule
         return $dec;
     }
 
+    private function SetValueWhenChanged($Ident, $Value) {
+        if($this->GetValue($Ident) != $Value) {
+            $this->SetValue($Ident, $Value);
+        }
+    }
+
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
@@ -105,15 +111,15 @@ class NMEAGPS extends IPSModule
             $frame = $parser->readLine($line);
             switch($frame->getFrameType()) {
                 case "GGA":
-                    $this->SetValue("DateTime", $frame->getUtcTime()->getTimestamp());
-                    $this->SetValue("Latitude", $this->GPSToDecimal($frame->getLatitude(), $frame->getLatitudeDirection()));
-                    $this->SetValue("Longitude", $this->GPSToDecimal($frame->getLongitude(), $frame->getLongitudeDirection()));
-                    $this->SetValue("Altitude", $frame->getAltitude());
-                    $this->SetValue("NumberOfSatellites", $frame->getNbSatellites());
-                    $this->SetValue("GPSQuality", $frame->getGpsQuality());
+                    $this->SetValueWhenChanged("DateTime", $frame->getUtcTime()->getTimestamp());
+                    $this->SetValueWhenChanged("Latitude", $this->GPSToDecimal($frame->getLatitude(), $frame->getLatitudeDirection()));
+                    $this->SetValueWhenChanged("Longitude", $this->GPSToDecimal($frame->getLongitude(), $frame->getLongitudeDirection()));
+                    $this->SetValueWhenChanged("Altitude", $frame->getAltitude());
+                    $this->SetValueWhenChanged("NumberOfSatellites", $frame->getNbSatellites());
+                    $this->SetValueWhenChanged("GPSQuality", $frame->getGpsQuality());
                     break;
                 case "VTG":
-                    $this->SetValue("Speed", $frame->getSpeedKmH());
+                    $this->SetValueWhenChanged("Speed", $frame->getSpeedKmH());
                     break;
             }
         }
