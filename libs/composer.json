@@ -1,0 +1,5 @@
+{
+    "require": {
+        "bulton-fr/nmea-parser": "1.0.0"
+    }
+}
