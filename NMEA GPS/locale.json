@@ -1,6 +1,13 @@
 {
     "translations": {
         "de": {
+            "Date/Time": "Datum/Uhrzeit",
+            "Latitude": "Breitengrad (Lat)",
+            "Longitude": "Längengrad (Lon)",
+            "Altitude": "Höhe über n.N.",
+            "Speed": "Geschwindkeit",
+            "Number of Satellites": "Anzahl von Satelliten",
+            "GPS Quality": "GPS Qualität"
         }
     }
 }

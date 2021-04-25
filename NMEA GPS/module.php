@@ -40,13 +40,13 @@ class NMEAGPS extends IPSModule
             IPS_SetVariableProfileAssociation('GPS.Quality', 8, 'Simulation Mode', '', -1);
         }
 
-        $this->RegisterVariableInteger('DateTime', 'DateTime', '~UnixTimestamp', 0);
-        $this->RegisterVariableFloat('Latitude', 'Latitude', 'GPS.Position', 1);
-        $this->RegisterVariableFloat('Longitude', 'Longitude', 'GPS.Position', 2);
-        $this->RegisterVariableFloat('Altitude', 'Altitude', 'GPS.Altitude', 3);
-        $this->RegisterVariableFloat('Speed', 'Speed', '~WindSpeed.kmh', 4);
-        $this->RegisterVariableInteger('NumberOfSatellites', 'Number of Satellites', '', 5);
-        $this->RegisterVariableInteger('GPSQuality', 'GPS Quality', 'GPS.Quality', 6);
+        $this->RegisterVariableInteger('DateTime', $this->Translate('Date/Time'), '~UnixTimestamp', 0);
+        $this->RegisterVariableFloat('Latitude',  $this->Translate('Latitude'), 'GPS.Position', 1);
+        $this->RegisterVariableFloat('Longitude',  $this->Translate('Longitude'), 'GPS.Position', 2);
+        $this->RegisterVariableFloat('Altitude',  $this->Translate('Altitude'), 'GPS.Altitude', 3);
+        $this->RegisterVariableFloat('Speed',  $this->Translate('Speed'), '~WindSpeed.kmh', 4);
+        $this->RegisterVariableInteger('NumberOfSatellites',  $this->Translate('Number of Satellites'), '', 5);
+        $this->RegisterVariableInteger('GPSQuality',  $this->Translate('GPS Quality'), 'GPS.Quality', 6);
     }
 
     public function Destroy()
