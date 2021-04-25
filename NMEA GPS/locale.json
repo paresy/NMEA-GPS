@@ -6,7 +6,7 @@
             "Longitude": "Längengrad (Lon)",
             "Altitude": "Höhe über n.N.",
             "Speed": "Geschwindkeit",
-            "Number of Satellites": "Anzahl von Satelliten",
+            "Number of Satellites": "Anzahl der Satelliten",
             "GPS Quality": "GPS Qualität"
         }
     }
