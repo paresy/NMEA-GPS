@@ -32,13 +32,13 @@ class GGA extends \BultonFr\NMEA\Frame
         .'(E|W),' //E or W (East or West)
         .'(\d{0,1}),' //GPS Quality Indicator
         .'(\d{0,2}),' //Number of satellites in view, 00 - 12
-        .'([0-9\.]*),' //Horizontal Dilution of position
-        .'([0-9\.]*),' //Antenna Altitude above/below mean-sea-level (geoid)
+        .'([0-9\.-]*),' //Horizontal Dilution of position
+        .'([0-9\.-]*),' //Antenna Altitude above/below mean-sea-level (geoid)
         .'([A-Z]{0,1}),' //Units of antenna altitude, meters
         .'([0-9\.-]*),' //Geoidal separation, the difference between the WGS-84
         //earth ellipsoid and mean-sea-level (geoid), "-" means mean-sea-level below ellipsoid
         .'([A-Z]{0,1}),' //Units of geoidal separation, meters
-        .'([0-9\.]*),' //Age of differential GPS data, time in seconds since last SC104
+        .'([0-9\.-]*),' //Age of differential GPS data, time in seconds since last SC104
         //type 1 or 9 update, null field when DGPS is not used
         .'(\d{0,4})' //DGPS station ID, 0000-1023
         .'$/m';
