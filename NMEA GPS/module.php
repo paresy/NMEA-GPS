@@ -63,7 +63,17 @@ class NMEAGPS extends WebHookModule
         //Never delete this line!
         parent::ApplyChanges();
     }
-
+    
+    /**
+     * This function will be called by the hook control. Visibility should be protected!
+     */
+    protected function ProcessHookData()
+    {
+        header("Access-Control-Allow-Origin:*");
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($this->GetTrackerLocation());
+    }
+    
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
