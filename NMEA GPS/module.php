@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 include_once __DIR__ . '/../libs/vendor/autoload.php';
 
-class NMEAGPS extends IPSModule
+class NMEAGPS extends WebHookModule
 {
     public function Create()
     {
