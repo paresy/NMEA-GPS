@@ -3,12 +3,13 @@
 declare(strict_types=1);
 
 include_once __DIR__ . '/../libs/vendor/autoload.php';
+include_once __DIR__ . '/../libs/WebHookModule.php';
 
 class NMEAGPS extends WebHookModule
 {
     public function __construct($InstanceID)
     {
-        parent::__construct($InstanceID, 'NMEAgps/' . $InstanceID);
+        parent::__construct($InstanceID, 'NMEAGPS/' . $InstanceID);
     }
 
     public function Create()
