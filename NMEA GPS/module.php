@@ -6,12 +6,15 @@ include_once __DIR__ . '/../libs/vendor/autoload.php';
 
 class NMEAGPS extends WebHookModule
 {
+    public function __construct($InstanceID)
+    {
+        parent::__construct($InstanceID, 'NMEAgps/' . $InstanceID);
+    }
+
     public function Create()
     {
         //Never delete this line!
         parent::Create();
-
-        $this->RequireParent('{6DC3D946-0D31-450F-A8C6-C42DB8D7D4F1}');
 
         if (!IPS_VariableProfileExists('GPS.Position')) {
             IPS_CreateVariableProfile('GPS.Position', VARIABLETYPE_FLOAT);
