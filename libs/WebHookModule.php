@@ -59,7 +59,8 @@ class WebHookModule extends IPSModule
      */
     protected function ProcessHookData()
     {
-        $this->SendDebug('WebHook', 'Array POST: ' . print_r($_POST, true), 0);
+        $this->SendDebug('WebHook', 'Array Get: ' . print_r($_GET, true), 0);
+        $this->SendDebug('WebHook', 'Array RAW: ' . file_get_contents("php://input"), 0);
     }
 
     private function RegisterHook($WebHook)
