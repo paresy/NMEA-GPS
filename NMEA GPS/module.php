@@ -77,10 +77,11 @@ class NMEAGPS extends WebHookModule
         
         $deviceid 	= $_GET['serial_num'];
         echo "OK: ".$deviceid."\n";
-
+       
+        $this->SendDebug('WebHook', 'Device ID:  ' . print_r($deviceid), 0);
+       
         $data = json_decode(file_get_contents("php://input"));
-        $buffer = utf8_decode($data);
-        $lines = explode("\r\n", $buffer);
+        $lines = explode("\r\n", $data);
         
         $this->SendDebug('WebHook', 'Array Lines:  ' . print_r($lines), 0);
     }
