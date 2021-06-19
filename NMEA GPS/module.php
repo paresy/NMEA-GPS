@@ -75,12 +75,12 @@ class NMEAGPS extends WebHookModule
         $this->SendDebug('WebHook', 'Array IPS:  ' . print_r(json_decode($_IPS), true), 0);
         $this->SendDebug('WebHook', 'Array RAW:  ' . file_get_contents("php://input"), 0);
         
-        $deviceid 	= $this->json_decode($_GET['serial_num']);
+        $deviceid 	= json_decode($_GET['serial_num']);
         $this->SendDebug('WebHook', 'Device ID: ' . $deviceid, 0);
        
-        $data = $this->json_decode(file_get_contents("php://input"));
+        $data = json_decode(file_get_contents("php://input"));
         $lines = explode("\r\n", $data);
-        $this->SendDebug('WebHook', 'Array Lines:  ' . print_r($data), 0);
+        $this->SendDebug('WebHook', 'Array Data:  ' . print_r($data), 0);
         $this->SendDebug('WebHook', 'Array Lines:  ' . print_r($lines), 0);
     }
     
