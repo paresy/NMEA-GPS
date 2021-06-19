@@ -82,6 +82,8 @@ class NMEAGPS extends WebHookModule
         $lines = explode("\r\n", $data);
         $this->SendDebug('WebHook', 'Array Data:  ' . print_r($data), 0);
         $this->SendDebug('WebHook', 'Array Lines:  ' . print_r($lines), 0);
+
+        echo GetValue($this);
     }
     
     public function ReceiveData($JSONString)
