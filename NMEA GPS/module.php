@@ -6,12 +6,13 @@ include_once __DIR__ . '/../libs/vendor/autoload.php';
 
 class NMEAGPS extends IPSModule
 {
+   
     public function Create()
     {
         //Never delete this line!
         parent::Create();
 
-        $this->RequireParent('{6DC3D946-0D31-450F-A8C6-C42DB8D7D4F1}');
+        $this->RequireParent('{B4397469-A727-2DC7-F7A4-16D1A399643C}');
 
         if (!IPS_VariableProfileExists('GPS.Position')) {
             IPS_CreateVariableProfile('GPS.Position', VARIABLETYPE_FLOAT);
@@ -60,10 +61,16 @@ class NMEAGPS extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
     }
+ 
+    public function Send()
+    {
+        #$this->SendDataToParent(json_encode(['DataID' => '{906A476C-2501-DF19-9E5A-DF56A33C2B57}']));
+    }
 
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
+        IPS_LogMessage('Device RECV', utf8_decode($data->Buffer));
         $buffer = utf8_decode($data->Buffer);
         $lines = explode("\r\n", $buffer);
 
@@ -73,9 +80,39 @@ class NMEAGPS extends IPSModule
             if (!$line) {
                 continue;
             }
+            $matches = [];
 
-            $this->SendDebug('GPS', $line, 0 /* Text */);
+            if (preg_match('/^\$DeviceID,/', $line, $matches)) {
+                $this->RegisterVariableString('DeviceID', $this->Translate('Device ID'),'', 7);
+                $Value = explode(',', $line);
+                $this->SendDebug('GPS Device', 'Device ID: ' . $Value[1], 0);
+                $this->SetValueWhenChanged('DeviceID', strval($Value[1]));
+                continue;
+            }
+
+            if (preg_match('/^\$DeviceIMEI,/', $line, $matches)) {
+                $this->RegisterVariableString('DeviceIMEI', $this->Translate('Device IMEI'),'', 8);
+                $Value = explode(',', $line);
+                $this->SendDebug('GPS Device', 'Device IMEI: ' . $Value[1], 0);
+                $this->SetValueWhenChanged('DeviceIMEI', strval($Value[1]));
+                continue;
+            }
+
+            if (preg_match('/^\$PTLTGSM,/', $line, $matches)) {
+                $this->RegisterVariableString('GSMConnectionType', $this->Translate('GSM Connection Type'),'', 9);
+                $this->RegisterVariableString('GSMConnectionStrengh', $this->Translate('GSM Connection Strengh'),'', 10);
+                $Value = explode(',', $line);
+                $this->SendDebug('GPS Device', 'GSM Connection Type: ' . $Value[1], 0);
+                $this->SetValueWhenChanged('GSMConnectionType', strval($Value[1]));
+                $this->SendDebug('GPS Device', 'GSM Connection Strengh: ' . $Value[2], 0);
+                $this->SetValueWhenChanged('GSMConnectionStrengh', strval($Value[2]));
+                continue;
+            }
+
+            $this->SendDebug('GPS Device', $line, 0 /* Text */);
+
             $frame = $parser->readLine($line);
+            
             switch ($frame->getFrameType()) {
                 case 'GGA':
                     $this->SetValueWhenChanged('DateTime', $frame->getUtcTime()->getTimestamp());

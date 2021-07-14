@@ -1,4 +1,4 @@
-# NMEA GPS
+# NMEA GPS Webhook
 Beschreibung des Moduls.
 
 ### Inhaltsverzeichnis
@@ -13,7 +13,14 @@ Beschreibung des Moduls.
 
 ### 1. Funktionsumfang
 
-*
+* Erstellt einen Webhook der Daten von Geräten im NMEA Format entgegen nemen kann, aufbereitet und in einem einheitlichen Format an den Splitter übergibt.
+
+Folgende Geräte wurden bereits getestet:
+
+Gerät | Hersteller | Beschreibung
+------ | ------- | ------------
+RUT955 | Teltonika | LTE Router mit GPS Modul https://teltonika-networks.com/product/rut955/
+
 
 ### 2. Vorraussetzungen
 
@@ -26,15 +33,14 @@ Beschreibung des Moduls.
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
- Unter 'Instanz hinzufügen' kann das 'NMEA GPS'-Modul mithilfe des Schnellfilters gefunden werden.  
+ Unter 'Instanz hinzufügen' kann das 'NMEA GPS Webhook'-Modul mithilfe des Schnellfilters gefunden werden.  
 	- Weitere Informationen zum Hinzufügen von Instanzen in der [Dokumentation der Instanzen](https://www.symcon.de/service/dokumentation/konzepte/instanzen/#Instanz_hinzufügen)
 
 __Konfigurationsseite__:
 
 Name     | Beschreibung
 -------- | ------------------
-         |
-         |
+Label    | Zeigt konfigurierte Webhook URL an.
 
 ### 5. Statusvariablen und Profile
 
@@ -46,22 +52,16 @@ Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzeln
 
 #### Profile
 
-Name   | Typ
------- | -------
-GPS.Position | FLOAT
-GPS.Altitude | FLOAT
-GPS.Quality | INTEGER
+- Keine
 
 ### 6. WebFront
 
-#### Statusvariablen
-
-Anzeige der GPS Informationen des Gerätes. Sollte das Gerät GSM Daten im NMEA Format übertragen werden diese ebenfalls angezeigt.
+Die Funktionalität, die das Modul im WebFront bietet.
 
 ### 7. PHP-Befehlsreferenz
 
-`boolean GPS_BeispielFunktion(integer $InstanzID);`
+`boolean GPSIO_BeispielFunktion(integer $InstanzID);`
 Erklärung der Funktion.
 
 Beispiel:
-`GPS_BeispielFunktion(12345);`
+`GPSIO_BeispielFunktion(12345);`

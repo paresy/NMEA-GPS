@@ -1,0 +1,18 @@
+{
+    "elements": [
+        {
+            "type": "Select",
+            "name": "GatewayMode",
+            "caption": "Gateway Mode",
+            "options": [
+                {
+                    "label": "Webhook",
+                    "value": 0 },
+                {
+                    "label": "Seriel Port",
+                    "value": 1 }
+        ]}
+    ],
+    "actions": [],
+    "status": []
+}
