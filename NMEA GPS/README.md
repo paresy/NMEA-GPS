@@ -42,21 +42,21 @@ Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzeln
 
 #### Statusvariablen
 
-Name   | Typ     | Beschreibung
------- | ------- | ------------
-       |         |
-       |         |
+- Keine
 
 #### Profile
 
 Name   | Typ
 ------ | -------
-       |
-       |
+GPS.Position | FLOAT
+GPS.Altitude | FLOAT
+GPS.Quality | INTEGER
 
 ### 6. WebFront
 
-Die Funktionalität, die das Modul im WebFront bietet.
+#### Statusvariablen
+
+Anzeige der GPS Informationen des Gerätes. Sollte das Gerät GSM Daten im NMEA Format übertragen werden diese ebenfalls angezeigt.
 
 ### 7. PHP-Befehlsreferenz
 

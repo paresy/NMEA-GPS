@@ -13,7 +13,10 @@ Beschreibung des Moduls.
 
 ### 1. Funktionsumfang
 
-*
+* Führt verschiedene I/O Möglichkeiten zusammen und gibt die Daten an die Geräte weiter.
+* Derzeit gibt es Folgende Möglichkeiten
+       * Serial Port
+       * Webhook (Lokal oder Symcon Connect)
 
 ### 2. Vorraussetzungen
 
@@ -21,7 +24,7 @@ Beschreibung des Moduls.
 
 ### 3. Software-Installation
 
-* Über den Module Store das 'NMEA GPS Splitter'-Modul installieren.
+* Über den Module Store das 'NMEA GPS'-Modul installieren.
 * Alternativ über das Module Control folgende URL hinzufügen
 
 ### 4. Einrichten der Instanzen in IP-Symcon
@@ -31,10 +34,15 @@ Beschreibung des Moduls.
 
 __Konfigurationsseite__:
 
-Name     | Beschreibung
--------- | ------------------
-         |
-         |
+Am Splitter kann gewält werden welchen Eingangskanal dieser untersützt.
+
+Gateway Mode
+
+Name   | Typ
+------ | -------
+Webhook | Es wird ein I/O Modul und ein Webhook erstellt was mit dem Splitter veknüpft wird.
+Seriel Port | Es wird eine I/O zu einem Seriellen Port erstellt und mit dem Splitter verknüpft.
+
 
 ### 5. Statusvariablen und Profile
 
@@ -42,21 +50,15 @@ Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzeln
 
 #### Statusvariablen
 
-Name   | Typ     | Beschreibung
------- | ------- | ------------
-       |         |
-       |         |
+- Keine
 
 #### Profile
 
-Name   | Typ
------- | -------
-       |
-       |
+- Keine
 
 ### 6. WebFront
 
-Die Funktionalität, die das Modul im WebFront bietet.
+- Keine
 
 ### 7. PHP-Befehlsreferenz
 

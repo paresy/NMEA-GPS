@@ -13,7 +13,14 @@ Beschreibung des Moduls.
 
 ### 1. Funktionsumfang
 
-*
+* Erstellt einen Webhook der Daten von Geräten im NMEA Format entgegen nemen kann, aufbereitet und in einem einheitlichen Format an den Splitter übergibt.
+
+Folgende Geräte wurden bereits getestet:
+
+Gerät | Hersteller | Beschreibung
+------ | ------- | ------------
+RUT955 | Teltonika | LTE Router mit GPS Modul https://teltonika-networks.com/product/rut955/
+
 
 ### 2. Vorraussetzungen
 
@@ -21,7 +28,7 @@ Beschreibung des Moduls.
 
 ### 3. Software-Installation
 
-* Über den Module Store das 'NMEA GPS Webhook'-Modul installieren.
+* Über den Module Store das 'NMEA GPS'-Modul installieren.
 * Alternativ über das Module Control folgende URL hinzufügen
 
 ### 4. Einrichten der Instanzen in IP-Symcon
@@ -33,8 +40,7 @@ __Konfigurationsseite__:
 
 Name     | Beschreibung
 -------- | ------------------
-         |
-         |
+Label    | Zeigt konfigurierte Webhook URL an.
 
 ### 5. Statusvariablen und Profile
 
@@ -42,17 +48,11 @@ Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzeln
 
 #### Statusvariablen
 
-Name   | Typ     | Beschreibung
------- | ------- | ------------
-       |         |
-       |         |
+- Keine
 
 #### Profile
 
-Name   | Typ
------- | -------
-       |
-       |
+- Keine
 
 ### 6. WebFront
 

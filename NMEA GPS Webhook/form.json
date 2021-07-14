@@ -1,5 +1,9 @@
 {
     "elements": [],
-    "actions": [],
+    "actions": [
+        {
+            "type": "Label",
+            "name": "WebhookULR",
+            "caption": "" }],
     "status": []
 }

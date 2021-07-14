@@ -28,7 +28,6 @@ include_once __DIR__ . '/../libs/WebHookModule.php';
 		{
 			//Never delete this line!
 			parent::ApplyChanges();
-
 		}
 
 		public function ForwardData($JSONString)
@@ -79,6 +78,38 @@ include_once __DIR__ . '/../libs/WebHookModule.php';
 
 			$this->Send(strval($WebHookTransformtOutput));
 			$this->WriteAttributeString("WebHookTransformtOutput","");
+		}
+
+		public function FindHook()
+		{
+			$WebHook  = '/hook/NMEAGPS/' . $this->InstanceID;
+			$ids = IPS_GetInstanceListByModuleID('{015A6EB8-D6E5-4B93-B496-0D3F77AE9FE1}');
+			if (count($ids) > 0) {
+				$hooks = json_decode(IPS_GetProperty($ids[0], 'Hooks'), true);
+				$found = false;
+				foreach ($hooks as $index => $hook) {
+					if ($hook['Hook'] == $WebHook) {
+						if ($hook['TargetID'] == $this->InstanceID) {
+							$WebHookLabel = 'Die Webhook URL lautet: http://<Servername>:<Port>' . $WebHook ;
+							return $WebHookLabel;
+						}
+						$found = true;
+					}
+				}
+				if (!$found) {
+					$WebHookLabel = 'Keine passende Webhook URL gefunden I/O prüfen.';
+				}
+			}
+		}
+
+		public function GetConfigurationForm()
+		{
+			$HookURL = $this->FindHook();
+			$jsonForm = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
+	
+			$jsonForm['actions'][0]['caption'] = $HookURL;
+	
+			return json_encode($jsonForm);
 		}
 
 	}
