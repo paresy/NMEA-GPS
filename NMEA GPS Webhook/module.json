@@ -1,0 +1,16 @@
+{
+    "id": "{4613423B-9DD3-7908-3279-B2C8C1F37325}",
+    "name": "NMEA GPS Webhook",
+    "type": 1,
+    "vendor": "",
+    "aliases": [],
+    "parentRequirements": [],
+    "childRequirements": [
+        "{0E17898B-555A-9908-FE60-3D7BF2B42631}"
+    ],
+    "implemented": [
+        "{959346AD-7235-3720-73EC-E72DDB47C21E}"
+    ],
+    "prefix": "GPSIO",
+    "url": "https://github.com/TheEldar"
+}

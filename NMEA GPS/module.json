@@ -4,9 +4,13 @@
     "type": 3,
     "vendor": "",
     "aliases": [],
-    "parentRequirements": [],
+    "parentRequirements": [
+        "{906A476C-2501-DF19-9E5A-DF56A33C2B57}"
+    ],
     "childRequirements": [],
-    "implemented": [],
+    "implemented": [
+        "{565C8B85-ABA6-C334-6D4B-4B1643CAD2E9}"
+    ],
     "prefix": "GPS",
     "url": "https://www.symcon.de"
 }

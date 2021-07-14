@@ -3,19 +3,16 @@
 declare(strict_types=1);
 
 include_once __DIR__ . '/../libs/vendor/autoload.php';
-include_once __DIR__ . '/../libs/WebHookModule.php';
 
-class NMEAGPS extends WebHookModule
+class NMEAGPS extends IPSModule
 {
-    public function __construct($InstanceID)
-    {
-        parent::__construct($InstanceID, 'NMEAGPS/' . $InstanceID);
-    }
-
+   
     public function Create()
     {
         //Never delete this line!
         parent::Create();
+
+        $this->RequireParent('{B4397469-A727-2DC7-F7A4-16D1A399643C}');
 
         if (!IPS_VariableProfileExists('GPS.Position')) {
             IPS_CreateVariableProfile('GPS.Position', VARIABLETYPE_FLOAT);
@@ -64,23 +61,16 @@ class NMEAGPS extends WebHookModule
         //Never delete this line!
         parent::ApplyChanges();
     }
-    
-    /**
-     * This function will be called by the hook control. Visibility should be protected!
-     */
-    protected function ProcessHookData()
+ 
+    public function Send()
     {
-        $this->SendDebug('WebHook', 'Array Get:  ' . print_r($_GET, true), 0);
-        $this->SendDebug('WebHook', 'Array POST: ' . print_r($_POST, true), 0);
-        $this->SendDebug('WebHook', 'Array IPS:  ' . print_r($_IPS, true), 0);
-        $this->SendDebug('WebHook', 'Array RAW:  ' . file_get_contents("php://input"), 0);
-        
-        echo GetValue($this);
+        #$this->SendDataToParent(json_encode(['DataID' => '{906A476C-2501-DF19-9E5A-DF56A33C2B57}']));
     }
-    
+
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
+        IPS_LogMessage('Device RECV', utf8_decode($data->Buffer));
         $buffer = utf8_decode($data->Buffer);
         $lines = explode("\r\n", $buffer);
 
@@ -90,9 +80,39 @@ class NMEAGPS extends WebHookModule
             if (!$line) {
                 continue;
             }
+            $matches = [];
 
-            $this->SendDebug('GPS', $line, 0 /* Text */);
+            if (preg_match('/^\$DeviceID,/', $line, $matches)) {
+                $this->RegisterVariableString('DeviceID', $this->Translate('Device ID'),'', 7);
+                $Value = explode(',', $line);
+                $this->SendDebug('GPS Device', 'Device ID: ' . $Value[1], 0);
+                $this->SetValueWhenChanged('DeviceID', strval($Value[1]));
+                continue;
+            }
+
+            if (preg_match('/^\$DeviceIMEI,/', $line, $matches)) {
+                $this->RegisterVariableString('DeviceIMEI', $this->Translate('Device IMEI'),'', 8);
+                $Value = explode(',', $line);
+                $this->SendDebug('GPS Device', 'Device IMEI: ' . $Value[1], 0);
+                $this->SetValueWhenChanged('DeviceIMEI', strval($Value[1]));
+                continue;
+            }
+
+            if (preg_match('/^\$PTLTGSM,/', $line, $matches)) {
+                $this->RegisterVariableString('GSMConnectionType', $this->Translate('GSM Connection Type'),'', 9);
+                $this->RegisterVariableString('GSMConnectionStrengh', $this->Translate('GSM Connection Strengh'),'', 10);
+                $Value = explode(',', $line);
+                $this->SendDebug('GPS Device', 'GSM Connection Type: ' . $Value[1], 0);
+                $this->SetValueWhenChanged('GSMConnectionType', strval($Value[1]));
+                $this->SendDebug('GPS Device', 'GSM Connection Strengh: ' . $Value[2], 0);
+                $this->SetValueWhenChanged('GSMConnectionStrengh', strval($Value[2]));
+                continue;
+            }
+
+            $this->SendDebug('GPS Device', $line, 0 /* Text */);
+
             $frame = $parser->readLine($line);
+            
             switch ($frame->getFrameType()) {
                 case 'GGA':
                     $this->SetValueWhenChanged('DateTime', $frame->getUtcTime()->getTimestamp());

@@ -1,0 +1,22 @@
+{
+    "id": "{B4397469-A727-2DC7-F7A4-16D1A399643C}",
+    "name": "NMEA GPS Splitter",
+    "type": 2,
+    "vendor": "",
+    "aliases": [],
+    "parentRequirements": [
+        "{959346AD-7235-3720-73EC-E72DDB47C21E}",
+        "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}"
+
+    ],
+    "childRequirements": [
+        "{565C8B85-ABA6-C334-6D4B-4B1643CAD2E9}"
+    ],
+    "implemented": [
+        "{0E17898B-555A-9908-FE60-3D7BF2B42631}",
+        "{906A476C-2501-DF19-9E5A-DF56A33C2B57}",
+        "{018EF6B5-AB94-40C6-AA53-46943E824ACF}"
+    ],
+    "prefix": "GPSSP",
+    "url": "https://github.com/TheEldar"
+}

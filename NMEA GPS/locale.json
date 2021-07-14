@@ -7,7 +7,11 @@
             "Altitude": "Höhe über n.N.",
             "Speed": "Geschwindkeit",
             "Number of Satellites": "Anzahl der Satelliten",
-            "GPS Quality": "GPS Qualität"
+            "GPS Quality": "GPS Qualität",
+            "Device IMEI": "Geräte IMEI",
+            "Device ID": "Geräte ID",
+            "GSM Connection Type": "GSM Verbindungstyp",
+            "GSM Connection Strengh": "GSM Signalstärke"
         }
     }
 }
