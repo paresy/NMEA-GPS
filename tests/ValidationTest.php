@@ -10,6 +10,6 @@ class ValidationTest extends TestCaseSymconValidation
     }
     public function testValidateVEDirectModule(): void
     {
-        $this->validateModule(__DIR__ . '/../PositionTracking');
+        $this->validateModule(__DIR__ . '/../NMEA-GPS');
     }
 }

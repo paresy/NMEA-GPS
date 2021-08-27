@@ -5,7 +5,7 @@
     </php>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">../PositionTracking</directory>
+            <directory suffix=".php">../NMEA-GPS</directory>
         </whitelist>
     </filter>
 </phpunit>
