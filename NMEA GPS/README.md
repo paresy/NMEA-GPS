@@ -13,16 +13,17 @@ Beschreibung des Moduls.
 
 ### 1. Funktionsumfang
 
-*
+* Module, welches die GPS Daten über serieller Schnittstelle im NMEA Format empfängt. Dabei werden die Datenpakete GGA und VTG ausgewertet, um diverse Status-Variablen mit Werten zu befüllen.
 
 ### 2. Vorraussetzungen
 
 - IP-Symcon ab Version 5.5
+- NMEA kompatibles GPS Gerät mit seriellem Anschluss
 
 ### 3. Software-Installation
 
 * Über den Module Store das 'NMEA GPS'-Modul installieren.
-* Alternativ über das Module Control folgende URL hinzufügen
+* Alternativ über das Module Control folgende URL hinzufügen: https://github.com/paresy/NMEA-GPS
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
@@ -31,10 +32,7 @@ Beschreibung des Moduls.
 
 __Konfigurationsseite__:
 
-Name     | Beschreibung
--------- | ------------------
-         |
-         |
+Keine Konfiguration notwendig.
 
 ### 5. Statusvariablen und Profile
 
@@ -42,26 +40,28 @@ Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzeln
 
 #### Statusvariablen
 
-Name   | Typ     | Beschreibung
------- | ------- | ------------
-       |         |
-       |         |
+Name                  | Typ    
+--------------------- | -------
+Datum/Uhrzeit         | Integer 
+Breitengrad           | Float
+Längengrad            | Float
+Höhe über n.N.        | Float
+Geschwindkeit         | Float
+Anzahl der Satelliten | Integer
+GPS Qualität          | Integer
 
 #### Profile
 
-Name   | Typ
------- | -------
-       |
-       |
+Name         | Typ
+------------ | -------
+GPS.Position | Float
+GPS.Altitude | Float
+GPS.Quality  | Integer
 
 ### 6. WebFront
 
-Die Funktionalität, die das Modul im WebFront bietet.
+Keine spezielle Funktion. Variablen werden im WebFront angezeigt.
 
 ### 7. PHP-Befehlsreferenz
 
-`boolean GPS_BeispielFunktion(integer $InstanzID);`
-Erklärung der Funktion.
-
-Beispiel:
-`GPS_BeispielFunktion(12345);`
+Keine Funktionen vorhanden

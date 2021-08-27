@@ -41,12 +41,12 @@ class NMEAGPS extends IPSModule
         }
 
         $this->RegisterVariableInteger('DateTime', $this->Translate('Date/Time'), '~UnixTimestamp', 0);
-        $this->RegisterVariableFloat('Latitude',  $this->Translate('Latitude'), 'GPS.Position', 1);
-        $this->RegisterVariableFloat('Longitude',  $this->Translate('Longitude'), 'GPS.Position', 2);
-        $this->RegisterVariableFloat('Altitude',  $this->Translate('Altitude'), 'GPS.Altitude', 3);
-        $this->RegisterVariableFloat('Speed',  $this->Translate('Speed'), '~WindSpeed.kmh', 4);
-        $this->RegisterVariableInteger('NumberOfSatellites',  $this->Translate('Number of Satellites'), '', 5);
-        $this->RegisterVariableInteger('GPSQuality',  $this->Translate('GPS Quality'), 'GPS.Quality', 6);
+        $this->RegisterVariableFloat('Latitude', $this->Translate('Latitude'), 'GPS.Position', 1);
+        $this->RegisterVariableFloat('Longitude', $this->Translate('Longitude'), 'GPS.Position', 2);
+        $this->RegisterVariableFloat('Altitude', $this->Translate('Altitude'), 'GPS.Altitude', 3);
+        $this->RegisterVariableFloat('Speed', $this->Translate('Speed'), '~WindSpeed.kmh', 4);
+        $this->RegisterVariableInteger('NumberOfSatellites', $this->Translate('Number of Satellites'), '', 5);
+        $this->RegisterVariableInteger('GPSQuality', $this->Translate('GPS Quality'), 'GPS.Quality', 6);
     }
 
     public function Destroy()
