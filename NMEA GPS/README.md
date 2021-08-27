@@ -1,5 +1,5 @@
 # NMEA GPS
-Beschreibung des Moduls.
+Empfängt GPS Daten von einem NMEA kompatibelen Gerät
 
 ### Inhaltsverzeichnis
 
