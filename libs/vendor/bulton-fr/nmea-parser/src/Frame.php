@@ -175,7 +175,7 @@ abstract class Frame
         $checksum    = 0;
         
         for ($readedChar = 0; $readedChar < $nbCharInMsg; $readedChar++) {
-            $checksum ^= ord($this->message{$readedChar});
+            $checksum ^= ord($this->message[$readedChar]);
         }
         
         if ($checksum < 16) {
