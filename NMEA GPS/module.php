@@ -74,6 +74,11 @@ class NMEAGPS extends IPSModule
                 continue;
             }
 
+            // RUTX is sending empty GGA packets, which are not really NMEA compliant. Filter them.
+            if (strpos($line, "GPGGA,,,,,,0,,,,,,,,") !== false) {
+                continue;
+            }
+
             $this->SendDebug('GPS', $line, 0 /* Text */);
             $frame = $parser->readLine($line);
             switch ($frame->getFrameType()) {
